@@ -1,0 +1,24 @@
+<div class="ui middle aligned selection divided list">
+    <ng-container *ngIf="favoriten$ | async as favoriten; else loading">
+      <rezManager-rezept-list-item class="item"
+      *ngFor="let favorit of favoriten"
+      [rezept]="favorit.rezept"
+      draggable="true"
+      (dragstart)="dragStartEvent($event, favorit.rezept)"
+      (dragend)="dragStartEvent($event, favorit.rezept)"></rezManager-rezept-list-item>
+      
+      <p *ngIf="!favoriten.length">
+        Keine Favoriten gefunden!
+      </p>
+    </ng-container>
+  
+    <ng-template #loading>
+      <div class="ui active dimmer">
+        <div class="ui large text loader">
+          Daten werden geladen...
+        </div>
+      </div>
+    </ng-template>
+  
+  </div>
+      

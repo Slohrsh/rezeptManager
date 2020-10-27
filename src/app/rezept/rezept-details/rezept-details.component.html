@@ -1,0 +1,24 @@
+<div class="ui celled grid">
+  <div class="row">
+    <div class="three wide column">
+      <div class="ui celled grid">
+        <div class="row">
+          <img src="{{rezept.bild}}">
+        </div>
+        <div class="row" *ngFor="let zutat of rezept.zutaten">
+          {{zutat.menge}} {{zutat.zutat}}
+        </div>
+      </div>
+    </div>
+    <div class="thirteen wide column">
+      <h1>{{rezept.titel}}</h1>
+      <p>{{rezept.kcal}} kcal pro Stück</p>
+      <p [innerHTML]="rezept.rezept | nl2br"></p>
+
+      <a routerLink="../.." class="ui blue button" (click)="saveFavorit(rezept.id)">
+        Favorit
+        <i class="right arrow icon"></i>
+      </a>
+    </div>
+  </div>
+</div>

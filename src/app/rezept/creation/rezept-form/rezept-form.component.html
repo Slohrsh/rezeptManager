@@ -1,0 +1,44 @@
+<form class="ui form"
+  [formGroup]="rezeptForm"
+  (ngSubmit)="submitForm()">
+
+  <label>Titel</label>
+  <input formControlName="titel">
+
+  <label>Rezept</label>
+  <textarea formControlName="rezept"></textarea>
+
+  <label>Kcal</label>
+  <input formControlName="kcal">
+
+  <label>Bild</label>
+  <input formControlName="bild">
+  
+  <label>Zutaten</label>
+  <rezManager-search-zutaten (zutat)="addZutat($event)"></rezManager-search-zutaten>
+
+  <button type="button" class="ui mini button"
+    (click)="addZutatControl()">
+    + Zutat
+  </button>
+  <div formArrayName="zutaten">
+    <div class="fields"
+      *ngFor="let c of zutaten.controls; index as i"
+      [formGroupName]="i">
+      <div class="two wide field">
+        <input placeholder="Menge"
+          formControlName="menge">
+      </div>
+      <div class="fourteen wide field">
+        <input placeholder="Zutat"
+          formControlName="beschreibung">
+      </div>
+    </div>
+  </div>
+
+
+  <button class="ui button" type="submit"
+    [disabled]="rezeptForm.invalid">
+    Speichern
+  </button>
+</form>

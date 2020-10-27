@@ -1,0 +1,8 @@
+<img class="ui tiny image"
+     *ngIf="rezept.bild"
+     src="{{rezept.bild}}"
+     bmZoom>
+<div class="content">
+  <div class="header">{{ rezept.titel }}</div>
+  <div *ngIf="rezept.kcal" class="description">{{ rezept.kcal }} kcal</div>
+</div>

@@ -1,0 +1,23 @@
+<div class="ui middle aligned selection divided list">
+  <rezManager-search-rezept (rezepte)="rezepte$"></rezManager-search-rezept>
+  <ng-container *ngIf="rezepte$ | async as rezepte; else loading">
+    <rezManager-rezept-list-item class="item"
+    *ngFor="let rezept of rezepte"
+    [rezept]="rezept"
+    [routerLink]="rezept.id"></rezManager-rezept-list-item>
+    
+    <p *ngIf="!rezepte.length">
+      Keine Rezepte gefunden!
+    </p>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="ui active dimmer">
+      <div class="ui large text loader">
+        Daten werden geladen...
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+    
