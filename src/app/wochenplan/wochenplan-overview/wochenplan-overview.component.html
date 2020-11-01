@@ -6,6 +6,12 @@
         </div>
         <div class="twelve wide column">
             <ng-container *ngIf="eintraege$ | async as eintraege; else loading">
+                <div class="ui input" data-children-count="1">
+                    <input type="number" placeholder="Woche" [(ngModel)]="woche">
+                </div>
+                <a class="ui blue button" (click)="aktualisiereWoche()">
+                    Aktualisieren
+                </a>
                 <div class="ui celled grid">
                     <div class="row">
                         <div class="two wide column">
@@ -24,7 +30,8 @@
                                 <div class="two wide column" (dragover)="dragOver($event)"
                                     (drop)="drop($event, zeitraum, i)">
                                     <rezManager-wochenplan-item [events]="dropSubject" [posTag]="i"
-                                        [posZeitraum]="zeitraum" [eintraege]="eintraege"></rezManager-wochenplan-item>
+                                        [posZeitraum]="zeitraum" [eintraege]="eintraege"
+                                        (click)="navigateToRezept(zeitraum, i)"></rezManager-wochenplan-item>
                                 </div>
                             </ng-container>
                         </div>
@@ -40,6 +47,14 @@
                         </ng-container>
                     </div>
                 </div>
+                <a class="ui blue button" (click)="druck()">
+                    Drucken
+                    <i class="right arrow icon"></i>
+                </a>
+                <a class="ui blue button" (click)="navigateToEinkaufsliste()">
+                    Einkaufsliste
+                    <i class="right arrow icon"></i>
+                </a>
             </ng-container>
             <ng-template #loading>
                 <div class="ui active dimmer">

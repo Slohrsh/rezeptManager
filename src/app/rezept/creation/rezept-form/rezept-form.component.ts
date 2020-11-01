@@ -25,17 +25,31 @@ export class RezeptFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    if(this.rezept) {
+      this.setFormValues(this.rezept);
+    }
+  }
+
+  private setFormValues(rezept: Rezept) {
+    console.log('rezept');
+    console.log(rezept);
+    this.rezeptForm.patchValue(rezept);
+
+    this.rezeptForm.setControl(
+      'zutaten',
+      this.buildZutatenArray(rezept.zutaten)
+    );
   }
 
   addZutatControl() {
     this.zutaten.push(
-      this.fb.group({menge : '', beschreibung: ''})
+      this.fb.group({menge : '', beschreibung: '', einheit: ''})
     );
   }
 
   addZutat(zutat) {
     this.zutaten.push(
-      this.fb.group({menge : '', beschreibung: zutat.zutat})
+      this.fb.group({menge : '', beschreibung: zutat.zutat, einheit: '', id: zutat.id })
     );
     this.loadedZutaten.push(zutat);
   }
@@ -52,6 +66,10 @@ export class RezeptFormComponent implements OnInit {
     });
   }
 
+  deleteZutat(index: number) {
+    this.zutaten.removeAt(index);
+  } 
+
   private buildZutatenArray(values: Zutat[]): FormArray {
     if(values){
       return this.fb.array(
@@ -63,7 +81,7 @@ export class RezeptFormComponent implements OnInit {
 
   submitForm() {
     const formValue = this.rezeptForm.value;
-    
+
     if(formValue.zutaten) {
       for(let zutat of formValue.zutaten) {
         for(let loadedZutat of this.loadedZutaten){

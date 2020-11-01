@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { WochenplanEintragView } from 'src/app/model/wochenplan';
-import { WochenplanItem } from '../../model/transfer';
+import { ConfigurationService } from 'src/app/service/configuration.service';
 
 @Component({
   selector: 'rezManager-wochenplan-item',
@@ -12,18 +12,28 @@ export class WochenplanItemComponent implements OnInit {
 
   private eventsSubscription: Subscription;
 
-  @Input() events: Subject<WochenplanItem>;
+  @Input() events: Subject<WochenplanEintragView>;
   @Input() posTag: number;
   @Input() posZeitraum: string;
   @Input() eintraege: WochenplanEintragView[];
 
+  @Input() showQr: boolean = false;
+
   titel: string;
+  kcal: number;
+  url: string;
+
+  constructor(private config: ConfigurationService) {}
   
   ngOnInit(){
-    this.eventsSubscription = this.events.subscribe((item) => this.setRezept(item));
+    if(this.events) {
+      this.eventsSubscription = this.events.subscribe((item) => this.setRezept(item));
+    }
     const currentEintrag = this.getCurrentEintrag(this.posZeitraum, this.posTag)
     if(currentEintrag){
       this.titel = currentEintrag.rezept.titel;
+      this.kcal = currentEintrag.rezept.kcal;
+      this.url = this.config.apiUrl + '/rezept/' + currentEintrag.rezept.id;
     }
   }
 
@@ -40,14 +50,16 @@ export class WochenplanItemComponent implements OnInit {
     return foundEintrag;
   }
   
-  setRezept(item: WochenplanItem) {
-    if(this.posTag === item.posTag && this.posZeitraum === item.posZeitraum) {
-      this.titel = item.titel;
+  setRezept(item: WochenplanEintragView) {
+    if(this.posTag === item.tag && this.posZeitraum === item.zeitraum) {
+      this.titel = item.rezept.titel;
     }
   }
 
   ngOnDestroy() {
-    this.eventsSubscription.unsubscribe();
+    if(this.eventsSubscription) {
+      this.eventsSubscription.unsubscribe();
+    }
   }
 
 }

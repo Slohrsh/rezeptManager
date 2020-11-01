@@ -5,19 +5,24 @@ import { retry, map, catchError } from 'rxjs/operators';
 
 import { Rezept, RezeptRaw, Zutat } from '../model/rezept'
 import { RezeptFactory } from '../model/rezeptFactory'
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RezepteService {
   
-  private readonly URL = 'http://localhost:3000/rezept';
-  private readonly urlZutat = 'http://localhost:3000/zutat';
+  
+  
+  private readonly rezeptUrl = this.config.apiUrl + '/rezept';
+  private readonly zutatUrl = this.config.apiUrl +  '/zutat';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private config: ConfigurationService) { }
 
   getAllRezepte(): Observable<Rezept[]> {
-    return this.http.get<RezeptRaw[]>(this.URL)
+    return this.http.get<RezeptRaw[]>(this.rezeptUrl)
     .pipe(
       retry(3),
       map(rezeptRaw =>
@@ -28,7 +33,7 @@ export class RezepteService {
   }
 
   getRezept(id: string) : Observable<Rezept> {
-      return this.http.get<RezeptRaw>(this.URL + '/' + id)
+      return this.http.get<RezeptRaw>(this.rezeptUrl + '/' + id)
       .pipe(
         retry(3),
         map(r => RezeptFactory.fromRaw(r)),
@@ -38,7 +43,7 @@ export class RezepteService {
 
   create(rezept: Rezept): Observable<any> {
     return this.http.post(
-      `${this.URL}`,
+      `${this.rezeptUrl}`,
       rezept,
       { responseType: 'text' }
     ).pipe(
@@ -46,9 +51,28 @@ export class RezepteService {
     );
   }
 
+  update(rezept: Rezept): Observable<any> {
+    return this.http.patch(
+      `${this.rezeptUrl}`,
+      rezept,
+      { responseType: 'text' }
+    ).pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  delete(rezeptId: number): Observable<any> {
+    return this.http.delete<RezeptRaw>(this.rezeptUrl + '/' + rezeptId)
+      .pipe(
+        retry(3),
+        map(r => RezeptFactory.fromRaw(r)),
+        catchError(this.errorHandler)
+      );
+  }
+
   getAllRezepteSearch(searchTerm: string): Observable<Rezept[]> {
     return this.http.get<Rezept[]>(
-      `${this.URL}/search/${searchTerm}`
+      `${this.rezeptUrl}/search/${searchTerm}`
     ).pipe(
       retry(3),
       map(rezept => rezept.map(r => r),
@@ -59,7 +83,7 @@ export class RezepteService {
 
   getAllZutatenSearch(searchTerm: string): Observable<Zutat[]> {
     return this.http.get<Zutat[]>(
-      `${this.urlZutat}/search/${searchTerm}`
+      `${this.zutatUrl}/search/${searchTerm}`
     ).pipe(
       retry(3),
       map(zutat => zutat.map(z => z),

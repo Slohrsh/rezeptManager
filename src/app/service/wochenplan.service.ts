@@ -3,15 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { retry, map, catchError } from 'rxjs/operators';
 import { WochenplanEintrag, WochenplanEintragView } from '../model/wochenplan';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WochenplanService {
 
-  private readonly URL = 'http://localhost:3000/wochenplan';
+  private readonly URL = this.config.apiUrl + '/wochenplan';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private config: ConfigurationService) { }
 
   create(eintrag: WochenplanEintrag): Observable<any> {
     return this.http.post(

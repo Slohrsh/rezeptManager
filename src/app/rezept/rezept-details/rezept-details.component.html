@@ -6,7 +6,7 @@
           <img src="{{rezept.bild}}">
         </div>
         <div class="row" *ngFor="let zutat of rezept.zutaten">
-          {{zutat.menge}} {{zutat.zutat}}
+          {{zutat.menge}} {{zutat.einheit}} {{zutat.beschreibung}}
         </div>
       </div>
     </div>
@@ -17,6 +17,14 @@
 
       <a routerLink="../.." class="ui blue button" (click)="saveFavorit(rezept.id)">
         Favorit
+        <i class="right arrow icon"></i>
+      </a>
+      <a class="ui yellow button" (click)="edit()">
+        Bearbeiten
+        <i class="right arrow icon"></i>
+      </a>
+      <a class="ui red button" (click)="delete()">
+        Löschen
         <i class="right arrow icon"></i>
       </a>
     </div>

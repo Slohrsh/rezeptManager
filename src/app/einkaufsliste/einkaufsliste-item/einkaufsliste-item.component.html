@@ -1,0 +1,5 @@
+<div class="ui checkbox">
+    <input type="checkbox" name="example" [(ngModel)]="isChecked" [checked]="isChecked" (ngModelChange)="checked()">
+    <label>{{eintrag.zutat}}, {{mengen}}</label>
+</div>
+<i class="trash icon" (click)="delete()"></i>

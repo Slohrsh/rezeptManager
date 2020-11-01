@@ -1,3 +1,7 @@
 <p>
     {{titel}}
 </p>
+<p *ngIf="kcal">
+    {{kcal}} kcal
+    <qrcode *ngIf="showQr" [qrdata]='url' [width]="40" [errorCorrectionLevel]="'M'" [elementType]="'svg'"></qrcode>
+</p>

@@ -1,6 +1,4 @@
-<form class="ui form"
-  [formGroup]="rezeptForm"
-  (ngSubmit)="submitForm()">
+<form class="ui form" [formGroup]="rezeptForm" (ngSubmit)="submitForm()">
 
   <label>Titel</label>
   <input formControlName="titel">
@@ -13,32 +11,40 @@
 
   <label>Bild</label>
   <input formControlName="bild">
-  
+
   <label>Zutaten</label>
   <rezManager-search-zutaten (zutat)="addZutat($event)"></rezManager-search-zutaten>
 
-  <button type="button" class="ui mini button"
-    (click)="addZutatControl()">
+  <button type="button" class="ui mini button" (click)="addZutatControl()">
     + Zutat
   </button>
   <div formArrayName="zutaten">
-    <div class="fields"
-      *ngFor="let c of zutaten.controls; index as i"
-      [formGroupName]="i">
+    <div class="fields" *ngFor="let c of zutaten.controls; index as i" [formGroupName]="i">
       <div class="two wide field">
-        <input placeholder="Menge"
-          formControlName="menge">
+        <input placeholder="Menge" formControlName="menge">
       </div>
-      <div class="fourteen wide field">
-        <input placeholder="Zutat"
-          formControlName="beschreibung">
+      <div class="two wide field">
+        <select class="ui dropdown" placeholder="Einheit" formControlName="einheit">
+          <option value="">Einheit</option>
+          <option value="Stück">Stück</option>
+          <option value="Prise">Prise</option>
+          <option value="EL">EL</option>
+          <option value="TL">TL</option>
+        </select>
       </div>
+      <div class="thirteen wide field">
+        <input placeholder="Zutat" formControlName="beschreibung">
+      </div>
+      <div class="one wide field">
+        <a class="ui red button" (click)="deleteZutat(i)">
+          <i class="trash icon"></i>
+        </a>
     </div>
+  </div>
   </div>
 
 
-  <button class="ui button" type="submit"
-    [disabled]="rezeptForm.invalid">
+  <button class="ui button" type="submit" [disabled]="rezeptForm.invalid">
     Speichern
   </button>
 </form>

@@ -4,7 +4,7 @@
     <rezManager-rezept-list-item class="item"
     *ngFor="let rezept of rezepte"
     [rezept]="rezept"
-    [routerLink]="rezept.id"></rezManager-rezept-list-item>
+    [routerLink]="['./detail', rezept.id]"></rezManager-rezept-list-item>
     
     <p *ngIf="!rezepte.length">
       Keine Rezepte gefunden!

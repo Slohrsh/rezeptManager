@@ -24,7 +24,10 @@ export class RezeptDetailsComponent implements OnInit {
   ngOnInit(): void {
     const params = this.route.snapshot.paramMap;
     this.rs.getRezept(params.get('rezeptId'))
-      .subscribe(r => this.rezept = r);
+      .subscribe(r => {
+        this.rezept = r;
+        console.log(r);
+      });
   }
 
   saveFavorit(rezeptId: number) {
@@ -32,6 +35,17 @@ export class RezeptDetailsComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(['../', 'rezept'], { relativeTo: this.route });
       });
+  }
+
+  delete(){
+    this.rs.delete(this.rezept.id)
+    .subscribe(() => {
+      this.router.navigate(['../..'], {relativeTo: this.route})
+    })
+  }
+
+  edit() {
+    this.router.navigate(['../..', 'edit', this.rezept.id], {relativeTo: this.route});
   }
 
 }

@@ -1,0 +1,8 @@
+<div class="ui middle aligned selection divided list">
+    <div class="ui celled grid">
+        <div class="row" *ngFor="let eintrag of eintraege">
+            <rezManager-einkaufsliste-item [eintrag]="eintrag" (deleteEintrag)="deleteEintrag($event)">
+            </rezManager-einkaufsliste-item>
+        </div>
+    </div>
+</div>

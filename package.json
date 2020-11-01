@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~10.1.6",
     "@angular/platform-browser-dynamic": "~10.1.6",
     "@angular/router": "~10.1.6",
+    "angularx-qrcode": "^10.0.11",
+    "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "semantic-ui-css": "^2.4.1",
     "tslib": "^2.0.0",

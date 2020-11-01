@@ -22,7 +22,7 @@ export class SearchZutatenComponent implements OnInit {
 
   ngOnInit(): void {
     this.keyUp$.pipe(
-      filter(term => term.length >= 3),
+      filter(term => term.length >= 2),
       debounceTime(500),
       distinctUntilChanged(),
       tap(() => this.isLoading = true),

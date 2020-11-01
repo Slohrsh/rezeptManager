@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { QRCodeModule } from 'angularx-qrcode';
+import { FormsModule } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { Nl2brPipe } from './nl2br.pipe';
@@ -18,6 +20,10 @@ import { RezeptDetailsComponent } from './rezept/rezept-details/rezept-details.c
 import { RezeptCreateComponent } from './rezept/creation/rezept-create/rezept-create.component';
 import { RezeptFormComponent } from './rezept/creation/rezept-form/rezept-form.component';
 import { FavoritenListComponent } from './wochenplan/favoriten-list/favoriten-list.component';
+import { WochenplanDruckComponent } from './wochenplan/wochenplan-druck/wochenplan-druck.component';
+import { EinkaufslisteListComponent } from './einkaufsliste/einkaufsliste-list/einkaufsliste-list.component';
+import { EinkaufslisteItemComponent } from './einkaufsliste/einkaufsliste-item/einkaufsliste-item.component';
+import { RezeptEditComponent } from './rezept/edit/rezept-edit/rezept-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +38,20 @@ import { FavoritenListComponent } from './wochenplan/favoriten-list/favoriten-li
     SearchZutatenComponent,
     WochenplanItemComponent,
     SearchRezeptComponent,
-    FavoritenListComponent
+    FavoritenListComponent,
+    WochenplanDruckComponent,
+    EinkaufslisteListComponent,
+    EinkaufslisteItemComponent,
+    RezeptEditComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QRCodeModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,7 @@ export interface RezeptRaw {
 export interface Zutat {
     id: number,
     menge: string;
+    einheit: string;
     beschreibung: string;
 }
 

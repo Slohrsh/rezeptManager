@@ -4,15 +4,18 @@ import { throwError, Observable } from 'rxjs';
 import { retry, map, catchError } from 'rxjs/operators';
 import { WochenplanEintrag } from '../model/wochenplan';
 import { Favorit, FavoritDisplayView } from '../model/favorit';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoritService {
+  
+  private readonly URL = this.config.apiUrl + '/favorit';
 
-  private readonly URL = 'http://localhost:3000/favorit';
-
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private config: ConfigurationService) { }
 
   getAllFavoriten(): Observable<FavoritDisplayView[]> {
     return this.http.get<FavoritDisplayView[]>(this.URL)
