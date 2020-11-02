@@ -8,6 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { QRCodeModule } from 'angularx-qrcode';
 import { FormsModule } from '@angular/forms';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { Nl2brPipe } from './nl2br.pipe';
 import { WochenplanOverviewComponent } from './wochenplan/wochenplan-overview/wochenplan-overview.component';
@@ -52,6 +57,10 @@ import { RezeptEditComponent } from './rezept/edit/rezept-edit/rezept-edit.compo
     ReactiveFormsModule,
     QRCodeModule,
     FormsModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

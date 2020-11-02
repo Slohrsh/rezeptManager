@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigurationService {
 
-  public apiUrl = 'https://balina.uber.space/api'; //'http://localhost:3000';
-
+  public appUrl = 'https://balina.uber.space';
+  // public appUrl = 'http://localhost:3000';
+  public apiUrl = `${this.appUrl}/api`;
+  
   constructor() { }
 }

@@ -1,8 +1,8 @@
 export interface EinkaufslisteEintrag{
     ids: number[];
     checked: boolean;
-    rezeptId: number;
-    zutat: string;
+    rezeptIds: string[];
+    beschreibung: string;
     mengen: Menge[];
     einheit: string;
 }

@@ -85,7 +85,7 @@ export class WochenplanOverviewComponent implements OnInit {
         item = eintrag;
       }
     })
-    this.router.navigate(['../', 'rezept', item.rezept.id], { relativeTo: this.route })
+    this.router.navigate(['../', 'rezept', 'detail', item.rezept.id], { relativeTo: this.route })
   }
   
   druck() {

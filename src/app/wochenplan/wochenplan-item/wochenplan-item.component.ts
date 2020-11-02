@@ -33,7 +33,7 @@ export class WochenplanItemComponent implements OnInit {
     if(currentEintrag){
       this.titel = currentEintrag.rezept.titel;
       this.kcal = currentEintrag.rezept.kcal;
-      this.url = this.config.apiUrl + '/rezept/' + currentEintrag.rezept.id;
+      this.url = this.config.appUrl + '/rezept/detail/' + currentEintrag.rezept.id;
     }
   }
 

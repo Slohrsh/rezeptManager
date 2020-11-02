@@ -62,10 +62,10 @@ export class RezepteService {
   }
 
   delete(rezeptId: number): Observable<any> {
-    return this.http.delete<RezeptRaw>(this.rezeptUrl + '/' + rezeptId)
+    return this.http.delete(
+      this.rezeptUrl + '/' + rezeptId,
+      { responseType: 'text' })
       .pipe(
-        retry(3),
-        map(r => RezeptFactory.fromRaw(r)),
         catchError(this.errorHandler)
       );
   }

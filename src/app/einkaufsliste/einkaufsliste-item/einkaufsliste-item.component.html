@@ -1,5 +1,15 @@
 <div class="ui checkbox">
-    <input type="checkbox" name="example" [(ngModel)]="isChecked" [checked]="isChecked" (ngModelChange)="checked()">
-    <label>{{eintrag.zutat}}, {{mengen}}</label>
+    <input type="checkbox" [(ngModel)]="isChecked" [checked]="isChecked" (ngModelChange)="checked()">
 </div>
-<i class="trash icon" (click)="delete()"></i>
+<div class="content">
+    <div class="header">
+        {{eintrag.beschreibung}}, {{mengen}}
+        <i class="trash icon" (click)="delete()"></i>
+    </div>
+    <div class="description">
+        Rezepte:
+        <ng-container *ngFor="let rezept of rezepte">
+            <label>{{rezept.titel}} </label>
+        </ng-container>
+    </div>
+  </div>

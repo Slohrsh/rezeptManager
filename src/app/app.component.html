@@ -1,7 +1,38 @@
-<div class="ui menu">
-<a routerLink="rezept" class="item">Rezepte</a>
-<a routerLink="wochenplan" class="item">Wochenplan</a>
-<a routerLink="einkaufsliste" class="item">Einkaufsliste</a>
-<a routerLink="admin" class="item">Administration</a>
-</div>
-<router-outlet></router-outlet>
+<mat-toolbar color="primary" class="example-toolbar">
+	<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+	<h1 class="example-app-name">Nested Menus</h1>
+</mat-toolbar>
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav mode="side" opened="true" (mouseenter)="mouseenter()"
+        (mouseleave)="mouseleave()">
+        <mat-nav-list>
+            <mat-list-item routerLink="rezept">
+                <span class="full-width" *ngIf="isExpanded">
+                    Rezepte
+                </span>
+                <mat-icon mat-list-icon>home</mat-icon>
+            </mat-list-item>
+            <mat-list-item routerLink="wochenplan">
+                <span class="full-width" *ngIf="isExpanded">
+                    Wochenplan
+                </span>
+                <mat-icon mat-list-icon>home</mat-icon>
+            </mat-list-item>
+            <mat-list-item routerLink="einkaufsliste">
+                <span class="full-width" *ngIf="isExpanded">
+                    Einkaufsliste
+                </span>
+                <mat-icon mat-list-icon>home</mat-icon>
+            </mat-list-item>
+            <mat-list-item outerLink="admin">
+                <span class="full-width" *ngIf="isExpanded">
+                    Administration
+                </span>
+                <mat-icon mat-list-icon>home</mat-icon>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <router-outlet></router-outlet>
+
+</mat-sidenav-container>
